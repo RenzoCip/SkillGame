@@ -5,9 +5,13 @@ using UnityEngine;
 public class PlayerSkills : MonoBehaviour
 {
     private SkillManager skillManager;
+    private EnemyManager enemyManager;
+
+    Vector3[] puntosDeAparicionPrueba;
     // Start is called before the first frame update
     void Start()
     {
+     enemyManager = FindAnyObjectByType<EnemyManager>();
      skillManager = FindAnyObjectByType<SkillManager>();   
     }
 
@@ -26,5 +30,6 @@ public class PlayerSkills : MonoBehaviour
         {
             skillManager.ActivarHabilidad(2); 
         }
+
     }
 }

@@ -30,6 +30,10 @@ public class PlayerSkills : MonoBehaviour
         {
             skillManager.ActivarHabilidad(2); 
         }
+        if (Input.GetKeyDown(KeyCode.P)) //Activa la tercera habilidad 
+        {
+           enemyManager.AparecerEnemigo(0,0);
+        }
 
     }
 }

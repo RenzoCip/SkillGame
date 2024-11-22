@@ -11,13 +11,13 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AparecerEnemigo(0,0);
+        
         enemigosActivos = new List<GameObject>();
 
         enemigosDisponibles = new List<Enemigo>();
 
-        enemigosDisponibles.Add(new Enemigo { nombre = "EnemigoBasico", vida = 100f, daño = 10f });
-        enemigosDisponibles.Add(new Enemigo { nombre = "EnemigoVolador", vida = 100f, daño = 5f });
+        enemigosDisponibles.Add(new Enemigo { nombre = "EnemigoBasico", vida = 100f, daño = 10f, recompensa= 1f, prefab = Resources.Load <GameObject>("Prefab/EnemigoBasico")});
+        enemigosDisponibles.Add(new Enemigo { nombre = "EnemigoVolador", vida = 100f, daño = 5f, recompensa = 1f, prefab = Resources.Load <GameObject>("Prefab/EnemigoVolador") });
 
         Debug.Log("EnemyManager inicializado.");
 

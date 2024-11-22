@@ -16,7 +16,7 @@ public class SkillManager : MonoBehaviour
 
         HabilidadesDisponibles = new List<Habilidad>();
         HabilidadesDisponibles.Add(new Habilidad { nombre = "Golpear", esActiva = true, cooldown = 0f, costo = 0f, duracion = 10f, rango = 3f, objetivoMask = LayerMask.GetMask("Golpeable") });
-        HabilidadesDisponibles.Add(new Habilidad { nombre = "Lanzar Proyectil", esActiva = true, cooldown = 3f, duracion = 0f, costo = 0f });
+        HabilidadesDisponibles.Add(new Habilidad { nombre = "Lanzar Proyectil", esActiva = false, cooldown = 3f, duracion = 0f, costo = 0f });
         HabilidadesDisponibles.Add(new Habilidad { nombre = "Aumento de velocidad", esActiva = false, cooldown = 0, duracion = 0f, costo = 0f });
 
         // Mostrar las habilidades en la consola

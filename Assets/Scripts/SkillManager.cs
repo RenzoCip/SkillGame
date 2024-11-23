@@ -15,7 +15,7 @@ public class SkillManager : MonoBehaviour
        
 
         HabilidadesDisponibles = new List<Habilidad>();
-        HabilidadesDisponibles.Add(new Habilidad { nombre = "Golpear", esActiva = true, cooldown = 0f, costo = 0f, duracion = 10f, rango = 3f, objetivoMask = LayerMask.GetMask("Golpeable") });
+        HabilidadesDisponibles.Add(new Habilidad { nombre = "Golpear", daño = 10, esActiva = true, cooldown = 0f, costo = 0f, duracion = 10f, rango = 3f, objetivoMask = LayerMask.GetMask("Golpeable") });
         HabilidadesDisponibles.Add(new Habilidad { nombre = "Lanzar Proyectil", esActiva = false, cooldown = 3f, duracion = 0f, costo = 0f });
         HabilidadesDisponibles.Add(new Habilidad { nombre = "Aumento de velocidad", esActiva = false, cooldown = 0, duracion = 0f, costo = 0f });
 
@@ -51,10 +51,12 @@ public class SkillManager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(origenGolpe, puntoDeGolpe.forward, out hit, habilidad.rango, habilidad.objetivoMask))
         {
-            if (hit.collider.CompareTag("Golpeable"))
+            EnemigoComportamiento enemigo = hit.collider.GetComponent<EnemigoComportamiento>();
+            if (enemigo !=null)
             {
-                Debug.Log("Golpeaste" + hit.collider.name);
-                Destroy(hit.collider.gameObject);
+                Debug.Log($"Golpeaste al enemigo {enemigo.datosEnemigo.nombre}");
+                enemigo.RecibirGolpe(habilidad.daño); // Aplica el daño según la habilidad
+                
             }
         }
         else

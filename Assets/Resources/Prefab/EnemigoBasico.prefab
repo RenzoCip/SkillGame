@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 84003748539456353}
   - component: {fileID: 3897135160803755323}
   - component: {fileID: 3971036469163689200}
+  - component: {fileID: 6148067017015745646}
   m_Layer: 3
   m_Name: EnemigoBasico
   m_TagString: Golpeable
@@ -105,3 +106,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6148067017015745646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4757939567658197259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9203da11a547e334f9e521f5bdb68a11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  datosEnemigo:
+    prefab: {fileID: 0}
+    nombre: 
+    vida: 0
+    "da\xF1o": 0
+    recompensa: 0

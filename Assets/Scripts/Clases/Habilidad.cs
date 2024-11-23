@@ -5,6 +5,7 @@ using UnityEngine;
 public class Habilidad
 {
     public string nombre;         // Nombre de la habilidad
+    public float daño;
     public bool esActiva;         // True para activas, false para pasivas
     public float cooldown;        // Tiempo de enfriamiento en segundos
     public float duracion;        // Duración del efecto en segundos (si aplica)

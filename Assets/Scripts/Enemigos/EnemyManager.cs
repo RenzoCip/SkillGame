@@ -52,6 +52,12 @@ public class EnemyManager : MonoBehaviour
         if (enemigo.prefab != null)
         {
             GameObject nuevoEnemigo = Instantiate(enemigo.prefab, puntoDeAparicion.position, Quaternion.identity);
+
+            EnemigoComportamiento comportamiento =nuevoEnemigo.GetComponent<EnemigoComportamiento>();
+            if (comportamiento != null)
+            {
+                comportamiento.datosEnemigo = enemigo;
+            }
             enemigosActivos.Add(nuevoEnemigo); // Añadir el enemigo a la lista de activos
             Debug.Log($"Apareció un {enemigo.nombre} en el punto de spawn {puntoDeAparicionIndex}");
         }

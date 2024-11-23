@@ -15,8 +15,9 @@ public class MovimientoJugador : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero; 
         Cursor.lockState = CursorLockMode.Locked;  // Bloquear el raton
     }
     void FixedUpdate() //para trabajar con fisicas

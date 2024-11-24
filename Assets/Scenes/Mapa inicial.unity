@@ -626,7 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 209642641}
   m_Layer: 0
-  m_Name: Punto de aparicion 1
+  m_Name: Punto de aparicion enemigo 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,7 +641,7 @@ Transform:
   m_GameObject: {fileID: 209642640}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.43, y: 0.61, z: 9.85}
+  m_LocalPosition: {x: -3.12, y: 1.26, z: 9.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1007,7 +1007,7 @@ Transform:
   m_GameObject: {fileID: 537296032}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7799997, z: 0}
+  m_LocalPosition: {x: 0, y: 1.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2326,7 +2326,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HabilidadesDisponibles: []
+  BalasDisponibles: []
   puntoDeGolpe: {fileID: 1250572274}
+  direccionCamara: {fileID: 808915782}
 --- !u!4 &1025685930
 Transform:
   m_ObjectHideFlags: 0
@@ -2357,6 +2359,7 @@ MonoBehaviour:
   enemigosDisponibles: []
   puntosDeAparicion:
   - {fileID: 209642641}
+  enemigosActivos: []
 --- !u!114 &1025685932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2414,7 +2417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40460426604368004, guid: e91d6c217a012184ebdddde763868985, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 847923746613660222, guid: e91d6c217a012184ebdddde763868985, type: 3}
       propertyPath: m_LocalScale.x
@@ -2874,7 +2877,7 @@ Transform:
   m_GameObject: {fileID: 1250572273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.51}
+  m_LocalPosition: {x: 0, y: 0, z: 0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

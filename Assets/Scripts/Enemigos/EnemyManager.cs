@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     public List<Enemigo> enemigosDisponibles;
     public Transform[] puntosDeAparicion; // por definir cuales seran los puntos de aparicion en este array
-    private List<GameObject> enemigosActivos;
+    public List<GameObject> enemigosActivos;
 
     // Start is called before the first frame update
     void Start()
@@ -53,17 +53,30 @@ public class EnemyManager : MonoBehaviour
         {
             GameObject nuevoEnemigo = Instantiate(enemigo.prefab, puntoDeAparicion.position, Quaternion.identity);
 
-            EnemigoComportamiento comportamiento =nuevoEnemigo.GetComponent<EnemigoComportamiento>();
+            EnemigoComportamiento comportamiento = nuevoEnemigo.GetComponent<EnemigoComportamiento>();
             if (comportamiento != null)
             {
                 comportamiento.datosEnemigo = enemigo;
             }
             enemigosActivos.Add(nuevoEnemigo); // Añadir el enemigo a la lista de activos
+            Debug.Log("los enemigos activos son: " + ObtenerListaDeEnemigosActivos());
             Debug.Log($"Apareció un {enemigo.nombre} en el punto de spawn {puntoDeAparicionIndex}");
         }
         else
         {
             Debug.LogError($"Prefab no asignado para el enemigo: {enemigo.nombre}");
         }
+    }
+    public string ObtenerListaDeEnemigosActivos()
+    {
+        if (enemigosActivos.Count == 0)
+            return "No hay enemigos activos.";
+
+        string nombres = "";
+        foreach (GameObject enemigo in enemigosActivos)
+        {
+            nombres += enemigo.name + ", ";
+        }
+        return nombres.TrimEnd(',', ' '); // Elimina la coma y el espacio extra al final
     }
 }

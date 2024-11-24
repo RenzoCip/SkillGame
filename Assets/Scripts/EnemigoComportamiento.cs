@@ -5,12 +5,17 @@ using UnityEngine;
 public class EnemigoComportamiento : MonoBehaviour
 {
     public Enemigo datosEnemigo;
+    private EnemyManager enemyManager;
     private ControladorBarraDeVidaEnemigo controladorBarra;
+
+    private GameObject enemigoActual;
 
     // Start is called before the first frame update
     void Start()
     {
+       
         controladorBarra = FindObjectOfType<ControladorBarraDeVidaEnemigo>();
+        enemyManager = FindObjectOfType<EnemyManager>();
     }
 
     // Update is called once per frame
@@ -21,6 +26,7 @@ public class EnemigoComportamiento : MonoBehaviour
 
     public void RecibirGolpe(float daño)
     {
+        enemigoActual = datosEnemigo.prefab;
         datosEnemigo.vida -= daño;
         Debug.Log($"{datosEnemigo.nombre} recibió {daño} de daño. Vida restante: {datosEnemigo.vida}");
 
@@ -33,7 +39,11 @@ public class EnemigoComportamiento : MonoBehaviour
 
         if (datosEnemigo.vida <= 0)
         {
-            SerDestruido();
+            // Remover al enemigo actual de enemigosActivos
+            enemyManager.enemigosActivos.Remove(gameObject); // gameObject se refiere al objeto que tiene este script
+            Debug.Log("Los Enemigos Activos son:" + enemyManager.ObtenerListaDeEnemigosActivos());
+
+            SerDestruido(); // Destruir al enemigo
         }
 
     }

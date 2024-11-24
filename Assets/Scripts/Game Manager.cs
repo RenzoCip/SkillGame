@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         FindAnyObjectByType<EnemyManager>();
-        enemyManager.AparecerEnemigo(0, 0);
+        //enemyManager.AparecerEnemigo(0, 0);
     }
 
     // Update is called once per frame

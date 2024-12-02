@@ -26,8 +26,9 @@ public class EnemigoComportamiento : MonoBehaviour
 
     public void RecibirGolpe(float daño)
     {
-        enemigoActual = datosEnemigo.prefab;
+         enemigoActual = datosEnemigo.prefab;
         datosEnemigo.vida -= daño;
+       
         Debug.Log($"{datosEnemigo.nombre} recibió {daño} de daño. Vida restante: {datosEnemigo.vida}");
 
         // Actualiza la barra de vida en la UI

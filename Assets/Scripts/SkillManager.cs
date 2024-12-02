@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SkillManager : MonoBehaviour
@@ -16,7 +17,7 @@ public class SkillManager : MonoBehaviour
     void Start()
     {
         BalasDisponibles = new List<Bala>();
-        BalasDisponibles.Add(new Bala { nombre = "Bala Basica", uso = " Daño", prefabBala = Resources.Load<GameObject>("Prefab/DisparoBasico") }); // tipo de bala que solo hace daño
+        BalasDisponibles.Add(new Bala { nombre = "Bala Basica", uso = " Daño", prefabBala = Resources.Load<GameObject>("Prefab/DisparoBasico"), velocidad = 30f, daño = 10 }); // tipo de bala que solo hace daño
         BalasDisponibles.Add(new Bala { nombre = "Bala Fria", uso = "Congelar" }); // tipo de bala que congela FALTA GREGAR PREFAB
         BalasDisponibles.Add(new Bala { nombre = "Bala Caliente", uso = "Calentar" }); // tipo de bala que quema FALTA GREGAR PREFAB
         BalasDisponibles.Add(new Bala { nombre = "Bala Luz", uso = "Iluminar" }); // tipo de bala que da luz FALTA GREGAR PREFAB
@@ -84,23 +85,9 @@ public class SkillManager : MonoBehaviour
         // Dispara el proyectil en la dirección deseada
         DispararProyectil(0, origenDisparo, direccionDisparo);
 
-        RaycastHit hit;// Si golpea algo en la trayectoria
-        if (Physics.Raycast(origenDisparo, direccionDisparo, out hit, habilidad.rango, habilidad.objetivoMask))
-        {
-            EnemigoComportamiento enemigo = hit.collider.GetComponent<EnemigoComportamiento>();
-            if (enemigo != null)
-            {
-                Debug.Log($"Golpeaste al enemigo {enemigo.datosEnemigo.nombre}");
-
-                enemigo.RecibirGolpe(habilidad.daño); // Aplica el daño según la habilidad
-
-            }
-        }
-        else
-        {
-            Debug.Log("no acertaste ningun objeto.");
-        }
     }
+
+
     private void DispararProyectil(int balaIndex, Vector3 origenDisparo, Vector3 direccionDisparo) //pasa el parametro para que se intancie la bala
     {
         if (balaIndex < 0 || balaIndex >= BalasDisponibles.Count) //esto en caso de que el indice pasado sea erroneo, verifica el indice 
@@ -126,6 +113,13 @@ public class SkillManager : MonoBehaviour
         if (rb != null)
         {
             rb.velocity = direccionDisparo.normalized * bala.velocidad;
+        }
+
+        // Configura las propiedades únicas del proyectil
+        Proyectil scriptProyectil = nuevaBala.GetComponent<Proyectil>();
+        if (scriptProyectil != null)
+        {
+            scriptProyectil.daño = bala.daño; // Asigna el daño desde la clase Bala
         }
 
     }

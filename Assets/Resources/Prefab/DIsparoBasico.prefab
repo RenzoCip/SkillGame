@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2828056745475206261}
   - component: {fileID: 2630095188274314613}
   - component: {fileID: -3038039342376161694}
+  - component: {fileID: -3268769690943519240}
   m_Layer: 0
   m_Name: DIsparoBasico
   m_TagString: Untagged
@@ -135,3 +136,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-3268769690943519240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7514280940326106427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38df00cd17e589b48963a6d2b5f2a49e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 20
+  tiempoDeVidaBala: 5

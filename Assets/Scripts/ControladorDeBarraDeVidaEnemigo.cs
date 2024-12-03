@@ -11,13 +11,14 @@ using UnityEngine.UI;
 
     public void MostrarBarraDeVida(EnemigoComportamiento enemigo)
     {
+        
         if (enemigoActual != enemigo)
         {
             enemigoActual = enemigo; // Guarda el enemigo actual
-            barraDeVida.maxValue = enemigo.datosEnemigo.vida; // Configura la vida máxima
-        }
+            barraDeVida.maxValue = enemigo.datosEnemigo.vidaMaxima; // Configura la vida máxima
 
-        barraDeVida.value = enemigo.datosEnemigo.vida; // Configura la vida actual normalizada para tener un valor entre 0 y 1
+        }
+        barraDeVida.value = enemigo.datosEnemigo.vida; // Actualiza la vida restante del enemigo
         barraDeVida.gameObject.SetActive(true); // Activa la barra
     }
 

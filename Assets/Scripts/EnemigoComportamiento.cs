@@ -26,9 +26,15 @@ public class EnemigoComportamiento : MonoBehaviour
 
     public void RecibirGolpe(float daño)
     {
-         enemigoActual = datosEnemigo.prefab;
+        if (datosEnemigo == null)
+        {
+            Debug.LogError("El enemigo no tiene datos asignados.");
+            return;
+        }
+
         datosEnemigo.vida -= daño;
-       
+
+
         Debug.Log($"{datosEnemigo.nombre} recibió {daño} de daño. Vida restante: {datosEnemigo.vida}");
 
         // Actualiza la barra de vida en la UI
@@ -40,10 +46,6 @@ public class EnemigoComportamiento : MonoBehaviour
 
         if (datosEnemigo.vida <= 0)
         {
-            // Remover al enemigo actual de enemigosActivos
-            enemyManager.enemigosActivos.Remove(gameObject); // gameObject se refiere al objeto que tiene este script
-            Debug.Log("Los Enemigos Activos son:" + enemyManager.ObtenerListaDeEnemigosActivos());
-
             SerDestruido(); // Destruir al enemigo
         }
 
@@ -59,7 +61,7 @@ public class EnemigoComportamiento : MonoBehaviour
         {
             controladorBarra.OcultarBarra();
         }
-
+        enemyManager.enemigosActivos.Remove(gameObject) ;
         Destroy(gameObject); // Destruye el objeto cuando la vida llega a 0
         // Aquí puedes agregar lógica adicional, como otorgar recompensas al jugador
     }

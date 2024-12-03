@@ -45,26 +45,38 @@ public class EnemyManager : MonoBehaviour
 
 
         // Obtén el enemigo y el punto de spawn
-        Enemigo enemigo = enemigosDisponibles[enemigoIndex];
+        Enemigo enemigoOriginal = enemigosDisponibles[enemigoIndex];
         Transform puntoDeAparicion = puntosDeAparicion[puntoDeAparicionIndex];
 
 
-        if (enemigo.prefab != null)
+        if (enemigoOriginal.prefab != null)
         {
-            GameObject nuevoEnemigo = Instantiate(enemigo.prefab, puntoDeAparicion.position, Quaternion.identity);
+            GameObject nuevoEnemigo = Instantiate(enemigoOriginal.prefab, puntoDeAparicion.position, Quaternion.identity);
+            Enemigo datosUnicos = new Enemigo
+            {
+                prefab = enemigoOriginal.prefab,
+                nombre = enemigoOriginal.nombre,
+                vida = enemigoOriginal.vida,
+                vidaMaxima= enemigoOriginal.vida,
+                daño = enemigoOriginal.daño,
+                recompensa = enemigoOriginal.recompensa
+            };
 
+            // Añadir el enemigo y sus datos a la lista de enemigos activos
+            enemigosActivos.Add(nuevoEnemigo);
             EnemigoComportamiento comportamiento = nuevoEnemigo.GetComponent<EnemigoComportamiento>();
+
             if (comportamiento != null)
             {
-                comportamiento.datosEnemigo = enemigo;
+                comportamiento.datosEnemigo = datosUnicos; // Asignar los datos al comportamiento del enemigo
             }
-            enemigosActivos.Add(nuevoEnemigo); // Añadir el enemigo a la lista de activos
+        
             Debug.Log("los enemigos activos son: " + ObtenerListaDeEnemigosActivos());
-            Debug.Log($"Apareció un {enemigo.nombre} en el punto de spawn {puntoDeAparicionIndex}");
+            Debug.Log($"Apareció un {datosUnicos.nombre} en el punto de spawn {puntoDeAparicionIndex}");
         }
         else
         {
-            Debug.LogError($"Prefab no asignado para el enemigo: {enemigo.nombre}");
+            Debug.LogError($"Prefab no asignado para el enemigo: {enemigoOriginal.nombre}");
         }
     }
     public string ObtenerListaDeEnemigosActivos()

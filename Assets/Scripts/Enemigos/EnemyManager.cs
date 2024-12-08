@@ -16,6 +16,11 @@ public class EnemyManager : MonoBehaviour
 
         enemigosDisponibles = new List<Enemigo>();
 
+        foreach (GameObject enemigo in GameObject.FindGameObjectsWithTag("Golpeable"))
+        {
+            enemigosActivos.Add(enemigo);
+        }
+
         enemigosDisponibles.Add(new Enemigo { nombre = "EnemigoBasico", vida = 100f, daño = 10f, recompensa= 1f, prefab = Resources.Load <GameObject>("Prefab/EnemigoBasico")});
         enemigosDisponibles.Add(new Enemigo { nombre = "EnemigoVolador", vida = 100f, daño = 5f, recompensa = 1f, prefab = Resources.Load <GameObject>("Prefab/EnemigoVolador") });
 

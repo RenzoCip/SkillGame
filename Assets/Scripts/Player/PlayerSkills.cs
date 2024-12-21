@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerSkills : MonoBehaviour
 {
+    private GameManager gameManager;
     private SkillManager skillManager;
     private EnemyManager enemyManager;
 
@@ -11,6 +12,7 @@ public class PlayerSkills : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+     gameManager = FindAnyObjectByType<GameManager>();
      enemyManager = FindAnyObjectByType<EnemyManager>();
      skillManager = FindAnyObjectByType<SkillManager>();   
     }
@@ -18,11 +20,11 @@ public class PlayerSkills : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) // Activa la primera habilidad
+        if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.isInShootMode) // Activa la primera habilidad
         {
             skillManager.ActivarHabilidad(0);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) // Activa la segunda habilidad
+        if (Input.GetKeyDown(KeyCode.Alpha2) && gameManager.isInShootMode) // Activa la segunda habilidad
         {
             skillManager.ActivarHabilidad(1);
         }

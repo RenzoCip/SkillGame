@@ -118,7 +118,7 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0.2
     - _Mode: 0
-    - _OcclusionStrength: 0.2
+    - _OcclusionStrength: 0.14409715
     - _OutlineFront: 1
     - _OverallBrightness: 0.75
     - _Parallax: 0

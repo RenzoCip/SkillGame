@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     EnemyManager enemyManager;
+    public bool isInShootMode;
     // Start is called before the first frame update
     void Start()
     {

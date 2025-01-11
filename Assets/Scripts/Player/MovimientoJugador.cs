@@ -15,7 +15,8 @@ public class MovimientoJugador : MonoBehaviour
     public Transform camara; // referencia a la camara del jugador
     private Rigidbody rb;   // referencia al rigidbody del jugador
     private GameManager gameManager;
-
+    private Animator animator;
+    public Canvas canvas;
     public GameObject posShootPoint; // Posición objetivo para el modo shoot
     public GameObject posWalkPoint; // Posición objetivo para el modo caminar
 
@@ -28,6 +29,7 @@ public class MovimientoJugador : MonoBehaviour
     void Start()
     {
         
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero; 
@@ -55,12 +57,16 @@ public class MovimientoJugador : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             gameManager.isInShootMode= true;
+            animator.SetBool("ShootMode",true);
+            canvas.gameObject.SetActive(true);
             Debug.Log("Clic derecho presionado y modo shoot activo");
             
         }
         if (Input.GetMouseButtonUp(1))
         {
             gameManager.isInShootMode = false;
+            animator.SetBool("ShootMode", false);
+            canvas.gameObject.SetActive(false);
             Debug.Log("Clic derecho soltado y modo shoot inactivo");
             
         }
@@ -70,7 +76,8 @@ public class MovimientoJugador : MonoBehaviour
         // recibe el movimiento con WASD
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
+        animator.SetFloat("XSpeed",horizontal,0.2f, Time.deltaTime);
+        animator.SetFloat("YSpeed",vertical,0.2f, Time.deltaTime);
         // Calcula el movimiento relativo a la dirección actual del jugador
         Vector3 movimiento = transform.forward * vertical + transform.right * horizontal;
         rb.MovePosition(transform.position + movimiento * speed * Time.fixedDeltaTime);

@@ -20,7 +20,7 @@ public class PlayerSkills : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.isInShootMode) // Activa la primera habilidad
+        if (Input.GetMouseButtonDown(0) && gameManager.isInShootMode) // Activa la primera habilidad
         {
             skillManager.ActivarHabilidad(0);
         }

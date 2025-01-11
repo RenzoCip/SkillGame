@@ -11,11 +11,16 @@ public class SkillManager : MonoBehaviour
     // Start is called before the first frame update
     public Transform puntoDeGolpe;
     public Transform direccionCamara;
-
+    public GameObject player;
+    Animator playerAnimator;
+    private float tipoDeGolpe =0;
+    private float tiempoUltimoGolpe = 0f; // Tiempo en el que se realizó el último golpe
+    private float cooldownGolpe = 1.5f; // Tiempo mínimo entre golpes
     // public GameObject bala; // luego se quitara y se hara con una clase bala, cuando se decida si 
 
     void Start()
     {
+        playerAnimator = player.GetComponent<Animator>();
         BalasDisponibles = new List<Bala>();
         BalasDisponibles.Add(new Bala { nombre = "Bala Basica", uso = " Daño", prefabBala = Resources.Load<GameObject>("Prefab/DisparoBasico"), velocidad = 30f, daño = 10 }); // tipo de bala que solo hace daño
         BalasDisponibles.Add(new Bala { nombre = "Bala Fria", uso = "Congelar" }); // tipo de bala que congela FALTA GREGAR PREFAB
@@ -55,10 +60,28 @@ public class SkillManager : MonoBehaviour
     }
     private void RealizarGolpe(Habilidad habilidad)
     {
+        // Verificar si ha pasado suficiente tiempo desde el último golpe
+        if (Time.time - tiempoUltimoGolpe < cooldownGolpe)
+        {
+            Debug.Log("No puedes realizar otro golpe aún, espera un momento.");
+            return;
+        }
+        tiempoUltimoGolpe = Time.time;
+
         Vector3 origenGolpe = puntoDeGolpe.position;
         Vector3 direccionGolpe = direccionCamara.forward;
+
         Debug.DrawRay(origenGolpe, direccionGolpe * habilidad.rango, Color.red, 1f);
 
+        playerAnimator.SetTrigger("Punch");
+        
+        tipoDeGolpe += 0.5f;
+
+        if (tipoDeGolpe > 1)
+        {
+            tipoDeGolpe = 0;
+        }
+        playerAnimator.SetFloat("TypePunch", tipoDeGolpe);
         RaycastHit hit;
         if (Physics.Raycast(origenGolpe, direccionGolpe, out hit, habilidad.rango, habilidad.objetivoMask))
         {
@@ -74,6 +97,7 @@ public class SkillManager : MonoBehaviour
         {
             Debug.Log("no golpeaste ningun objeto.");
         }
+
     }
 
     private void RealizarDisparo(Habilidad habilidad)

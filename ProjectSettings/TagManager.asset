@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Golpeable
   - Enemy
+  - PruebaEstado
   layers:
   - Default
   - TransparentFX

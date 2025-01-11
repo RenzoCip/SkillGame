@@ -74,6 +74,7 @@ public class EnemyManager : MonoBehaviour
             if (comportamiento != null)
             {
                 comportamiento.datosEnemigo = datosUnicos; // Asignar los datos al comportamiento del enemigo
+                comportamiento.spawnPoint = puntoDeAparicion.position;
             }
         
             Debug.Log("los enemigos activos son: " + ObtenerListaDeEnemigosActivos());

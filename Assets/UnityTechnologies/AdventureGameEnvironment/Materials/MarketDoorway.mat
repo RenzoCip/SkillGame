@@ -114,9 +114,9 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0.5
     - _GlossyReflections: 0
-    - _Metallic: 0
+    - _Metallic: 0.5
     - _Mode: 0
-    - _OcclusionStrength: 0.006022167
+    - _OcclusionStrength: 1.1452305
     - _OutlineFront: 1
     - _OverallBrightness: 0.75
     - _Parallax: 0

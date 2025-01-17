@@ -196,7 +196,7 @@ Material:
     - _Metallic3: 0
     - _Mode: 0
     - _NumLayersCount: 1
-    - _OcclusionStrength: 0.006022167
+    - _OcclusionStrength: 1.1452305
     - _OutlineFront: 1
     - _OverallBrightness: 0.75
     - _Parallax: 0

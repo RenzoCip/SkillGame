@@ -1577,6 +1577,7 @@ GameObject:
   - component: {fileID: 2029232298183186169}
   - component: {fileID: 8818171319945817347}
   - component: {fileID: 634965910945507509}
+  - component: {fileID: -4985676234620926400}
   m_Layer: 3
   m_Name: EnemigoBasico
   m_TagString: Golpeable
@@ -1745,6 +1746,28 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0.93, z: 0}
+--- !u!195 &-4985676234620926400
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5404865781030855432}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &5506245527864026658
 GameObject:
   m_ObjectHideFlags: 0

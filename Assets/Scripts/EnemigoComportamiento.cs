@@ -20,6 +20,8 @@ public class EnemigoComportamiento : MonoBehaviour
     public Enemigo datosEnemigo;
     private EnemyManager enemyManager;
     private ControladorBarraDeVidaEnemigo controladorBarra;
+    private NavMeshAgent agente; // Declarar el NavMeshAgent
+
 
     public GameObject target;
     public GameObject estadoEnemigo;
@@ -49,6 +51,10 @@ public class EnemigoComportamiento : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        agente = GetComponent<NavMeshAgent>(); // Inicializar el agente
+        agente.speed = velocidadEnemigo; // Configurar la velocidad del NavMeshAgent
+        agente.stoppingDistance = distanciaParaDetenerse; // Distancia mínima para detenerse
+
         velocidadInicialEnemigo = velocidadEnemigo;
         target = GameObject.FindWithTag("Player");
         animator = GetComponent<Animator>();
@@ -63,6 +69,8 @@ public class EnemigoComportamiento : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float velocidadAnimator = animator.GetFloat("XSpeed");
+        Debug.Log($"El valor actual de 'XSpeed' en el Animator es: {velocidadAnimator}");
 
         switch (estadoActual)
         {
@@ -109,6 +117,7 @@ public class EnemigoComportamiento : MonoBehaviour
     }
     private void EstadoVagar()
     {
+
         Debug.Log($"{datosEnemigo.nombre} está Vagueando espoerando que el jugador entre en el trigger");
         Renderer.material.color = Color.green;
 
@@ -117,8 +126,9 @@ public class EnemigoComportamiento : MonoBehaviour
         // Mover hacia el punto de spawn si no está en él
         if (Vector3.Distance(transform.position, spawnPoint) > 0.1f)
         {
+           
             SeguirTarget(spawnPoint);
-            GirarHacia(spawnPoint);
+
         }
 
         if (JugadorDentroRango)
@@ -165,7 +175,8 @@ public class EnemigoComportamiento : MonoBehaviour
             // Si el jugador no está en el campo de visión, usar última posición conocida
             destino = ultimaPosicionRecordadaTarget;
             SeguirTarget(destino);
-            GirarHacia(destino);
+            animator.SetFloat("XSpeed", 1, 0.2f, Time.deltaTime);
+
             if (Temporizador() == temporizadorDetectarJugador/3)
             {
                 estadoActual = EstadoEnemigo.Alerta;
@@ -175,8 +186,8 @@ public class EnemigoComportamiento : MonoBehaviour
         }
         // Llamar a SeguirTarget con el destino decidido.
         SeguirTarget(destino);
-        GirarHacia(destino);
-        // Cambiar a estado Atacar si está suficientemente cerca.
+        animator.SetFloat("XSpeed", 1, 0.2f, Time.deltaTime);
+
         if (Vector3.Distance(transform.position, target.transform.position) < distanciaParaDetenerse)
         {
             estadoActual = EstadoEnemigo.Atacar;
@@ -184,8 +195,10 @@ public class EnemigoComportamiento : MonoBehaviour
     }
     private void EstadoAtacar()
     {
+        GirarHacia(target.transform.position);
         Renderer.material.color = Color.blue;
         velocidadEnemigo = 0; // se ajusta velocidad para que el enemigo no se mueva mientras golpea al jugador 
+        animator.SetFloat("XSpeed", 2, 0.2f, Time.deltaTime);
         if ( Vector3.Distance(transform.position,target.transform.position) > distanciaParaDetenerse)
         {
             estadoActual = EstadoEnemigo.Perseguir;
@@ -249,23 +262,23 @@ public class EnemigoComportamiento : MonoBehaviour
     }
 
     private void SeguirTarget(Vector3 destino) //mueve el enemigo hacia el jugador 
-    { 
-        if (target != null)
+    {
+        
+        if (agente != null)
         {
-            float distanciaAlObjetivo = Vector3.Distance(transform.position, destino);
-            if (distanciaParaDetenerse < distanciaAlObjetivo)
+            agente.SetDestination(destino); // Establecer el destino del agente
+            if (Vector3.Distance(agente.transform.position, destino)<0.2f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, destino, velocidadEnemigo * Time.deltaTime);
-                GirarHacia(target.transform.position);
+                animator.SetFloat("XSpeed", 0, 0.2f, Time.deltaTime); // Animación de idle
             }
         }
-        
+
     }
     private void GirarHacia(Vector3 destino)
     {
         Vector3 direction = (destino - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Velocidad de giro
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Velocidad de giro
     }
 
     private bool JugadorDentroDeCampoDeVision()

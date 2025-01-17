@@ -8,8 +8,8 @@ public class MovimientoJugador : MonoBehaviour
     public float sensibilidadMouseY; // Sensibilidad Vertical del mouse
     public float rotacionY = 0f; // Controla la inclinación vertical de la cámara
     public float speed; // velocidad del juador
-    private float rotacionHaciaAbajo = 40; //limite de rotacion de la camara hacia abajo
-    private float rotacionHaciaArriba = 0; // limite de rotacion de la camara hacia arriba
+    public float rotacionHaciaAbajo = 20; //limite de rotacion de la camara hacia abajo
+    public float rotacionHaciaArriba = 0; // limite de rotacion de la camara hacia arriba
     public float rotacionHaciaAbajoShootMode;
     public float rotacionHaciaArribaShootMode;
     public Transform camara; // referencia a la camara del jugador

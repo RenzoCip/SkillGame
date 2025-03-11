@@ -24,6 +24,7 @@ public class MovimientoJugador : MonoBehaviour
 
     private Vector3 posShootModeCam; // Posición almacenada para el modo shoot
     private Vector3 posWalkModeCam; // Posición almacenada para el modo caminar
+    CamaraPrincipal camaraPrincipal;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,7 @@ public class MovimientoJugador : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;  // Bloquear el raton
         gameManager = FindAnyObjectByType<GameManager>();
+        camaraPrincipal = FindAnyObjectByType<CamaraPrincipal>();
     }
     private void Update()
     {
@@ -70,7 +72,9 @@ public class MovimientoJugador : MonoBehaviour
             Debug.Log("Clic derecho soltado y modo shoot inactivo");
             
         }
+
     }
+
     public void MoverJugador()
     {
         // recibe el movimiento con WASD
@@ -78,6 +82,14 @@ public class MovimientoJugador : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         animator.SetFloat("XSpeed",horizontal,0.2f, Time.deltaTime);
         animator.SetFloat("YSpeed",vertical,0.2f, Time.deltaTime);
+
+        if (Mathf.Approximately(horizontal, 0) && Mathf.Approximately(vertical, 0))
+        {
+            rb.velocity = Vector3.zero;        // Detiene el movimiento lineal
+            rb.angularVelocity = Vector3.zero; // Detiene la rotación angular
+            return; // Salimos de la función, no hacemos nada más
+        }
+
         // Calcula el movimiento relativo a la dirección actual del jugador
         Vector3 movimiento = transform.forward * vertical + transform.right * horizontal;
         rb.MovePosition(transform.position + movimiento * speed * Time.fixedDeltaTime);
@@ -110,14 +122,17 @@ public class MovimientoJugador : MonoBehaviour
     public void MoverCamaraModoShoot()
     {
 
-        if (gameManager.isInShootMode)
+        if (gameManager.isInShootMode || camaraPrincipal.camaraAtravesandoPared)
         {
             camara.position = Vector3.Lerp(camara.position, posShootModeCam, Time.deltaTime * velocidadTransicionCamara);
+            //Debug.Log("camara atravesando pared");
+            //Debug.Log("se mueve la camara a la posicion shoot");
            
         }
-        if (!gameManager.isInShootMode)
+        if (!gameManager.isInShootMode && !camaraPrincipal.camaraAtravesandoPared)
         {
             camara.position = Vector3.Lerp(camara.position, posWalkModeCam, Time.deltaTime * velocidadTransicionCamara);
+            //Debug.Log("se mueve la camara a la posicion walk");
         }
     }
     public void GuardarPosicionCamara()

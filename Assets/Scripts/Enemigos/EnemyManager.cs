@@ -56,7 +56,7 @@ public class EnemyManager : MonoBehaviour
 
         if (enemigoOriginal.prefab != null)
         {
-            GameObject nuevoEnemigo = Instantiate(enemigoOriginal.prefab, puntoDeAparicion.position, Quaternion.identity);
+            GameObject nuevoEnemigo = Instantiate(enemigoOriginal.prefab, puntoDeAparicion.position, puntoDeAparicion.rotation);
             Enemigo datosUnicos = new Enemigo
             {
                 prefab = enemigoOriginal.prefab,

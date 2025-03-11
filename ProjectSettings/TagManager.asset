@@ -5,8 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Golpeable
-  - Enemy
   - PruebaEstado
+  - Obstaculo
+  - Enemigo
+  - Cuerpo
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Golpeable
   - Water
   - UI
-  - 
+  - Enemigo
   - 
   - 
   - 
